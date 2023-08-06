@@ -25,9 +25,7 @@ export default function RootLayout({ children }) {
       <head />
       <body className={cn(`min-h-screen`, font.className)}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <AuthProvider>
-            {children}
-          </AuthProvider>
+          <AuthProvider>{children}</AuthProvider>
         </ThemeProvider>
       </body>
     </html>
