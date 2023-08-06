@@ -1,0 +1,41 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGODB_URI")
+}
+
+model Session {
+  id           String   @id @default(cuid()) @map("_id")
+  sessionToken String   @unique
+  userId       String   @db.ObjectId
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id                String    @id @default(auto()) @map("_id") @db.ObjectId
+  username          String    @unique
+  firstName         String?
+  lastName          String?
+  email             String    @unique
+  country           String?
+  emailVerified     DateTime?
+  image             String?
+  sessions          Session[]
+  password          String?
+  phonecode         String
+  phone             String?
+  referrerId        String?   @db.ObjectId
+  referrer          User?     @relation("referredBy", fields: [referrerId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  referrals         User[]    @relation("referredBy")
+  createdAt         DateTime  @default(now())
+  ancestorsIds      String[]
+  leftReferralsIds  String[]
+  rightReferralsIds String[]
+}
