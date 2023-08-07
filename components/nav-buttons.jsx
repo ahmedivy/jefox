@@ -4,12 +4,14 @@ import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 
 import { Button } from "./ui/button";
+import ThemeToggle from "./theme-toggle";
 
 function NavButtons() {
   const { status } = useSession();
 
   return (
     <div className="flex gap-x-3">
+      <ThemeToggle />
       {status === "authenticated" ? (
         <>
           <Button onClick={signOut} variant="outline">
