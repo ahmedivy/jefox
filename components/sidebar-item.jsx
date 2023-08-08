@@ -5,13 +5,13 @@ function SidebarItem({ icon: Icon, label, active, onClick }) {
   return (
     <div
       className={cn(
-        "w-full flex h-12 items-center rounded-lg p-2 font-semibold cursor-pointer",
+        "w-full flex h-9 items-center rounded-sm p-2 text-sm cursor-pointer transition-colors duration-200 ease-in-out",
         active ? "bg-primary text-white" : "hover:bg-secondary"
       )}
       onClick={onClick}
     >
-      <Icon className="w-6 h-6" />
-      <span className="ml-2">{label}</span>
+      <Icon className="w-4 h-4" />
+      <span className="ml-2 text-[14px]">{label}</span>
     </div>
   );
 }
