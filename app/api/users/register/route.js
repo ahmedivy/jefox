@@ -42,9 +42,12 @@ export async function POST(request) {
       country,
       referrerId: referrerUser.id,
       position,
-      ancestorsId: [...referrerUser.ancestorsIds, referrerUser.id],
+      ancestorsIds: [...referrerUser.ancestorsIds, referrerUser.id],
       username,
       password: hashedPassword,
+      leftReferralsIds: [],
+      rightReferralsIds: [],
+      image: null,
     },
   });
 
@@ -61,6 +64,7 @@ export async function POST(request) {
   });
 
   return NextResponse.json({
+    success: true,
     user,
   });
 }

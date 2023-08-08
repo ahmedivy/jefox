@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { ReloadIcon } from "@radix-ui/react-icons";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import { cn } from "@/lib/utils";
@@ -25,7 +26,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useRegister } from "@/lib/hooks/useRegister";
 
 export function RegisterCard() {
-  const router = useRouter();
   const {
     f,
     handleChange,
@@ -39,6 +39,7 @@ export function RegisterCard() {
     setPosition,
     handleTerms,
     terms,
+    toast,
   } = useRegister();
 
   return (
@@ -209,8 +210,15 @@ export function RegisterCard() {
                 {error}
               </p>
             )}
-            <Button className="w-full col-span-1 md:col-span-2">
-              Create Account
+            <Button
+              className="w-full col-span-1 md:col-span-2"
+              disabled={isLoading}
+              type="submit"
+            >
+              {isLoading && (
+                <ReloadIcon className="animate-spin h-4 w-4 mr-2" />
+              )}
+              {isLoading ? "Creating Account..." : "Create Account"}
             </Button>
           </div>
         </form>
