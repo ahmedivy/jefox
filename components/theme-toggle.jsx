@@ -15,7 +15,7 @@ export function ThemeToggle() {
   };
 
   return (
-    <Button variant="outline" size="icon" onClick={changeTheme}>
+    <Button variant="ghost" size="icon" onClick={changeTheme}>
       <Icon />
     </Button>
   );

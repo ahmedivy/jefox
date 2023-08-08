@@ -2,10 +2,11 @@ import "../globals.css";
 import { Inter } from "next/font/google";
 
 import { cn } from "@/lib/utils";
-import Header from "@/components/header";
 import { Toaster } from "@/components/ui/toaster";
 import AuthProvider from "@/components/auth-provider";
 import ThemeProvider from "@/components/theme-provider";
+import DashHeader from "@/components/dash-header";
+import Sidebar from "@/components/sidebar";
 
 const font = Inter({ subsets: ["latin"] });
 
@@ -28,7 +29,13 @@ export default function RootLayout({ children }) {
       <body className={cn(`min-h-screen`, font.className)}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <AuthProvider>
-            <Header />
+            <div className="flex">
+              <Sidebar />
+              <div className="w-full">
+                <DashHeader />
+                {children}
+              </div>
+            </div>
             {children}
             <Toaster />
           </AuthProvider>

@@ -1,12 +1,25 @@
 "use client";
 
+import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
 
+import { useToast } from "@/components/ui/use-toast";
+
 function Page() {
+  const { toast } = useToast();
   const { data: session, status } = useSession();
+
+  if (status === "unauthenticated") {
+    toast({
+      variant: "destructive",
+      description: "Sign in to access this page.",
+    });
+    redirect("/login");
+  }
+
   return (
     <div>
-      <pre>{JSON.stringify({ session, status }, null, 2)}</pre>
+      
     </div>
   );
 }

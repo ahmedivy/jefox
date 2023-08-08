@@ -15,16 +15,17 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
+import { ReloadIcon } from "@radix-ui/react-icons";
 
 export function LoginCard() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
   const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/";
+  const callbackUrl = searchParams.get("callbackUrl") || "/dashboard";
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -91,7 +92,12 @@ export function LoginCard() {
             {error && (
               <p className="text-red-500 text-sm text-center">{error}</p>
             )}
-            <Button className="w-full">Login</Button>
+            <Button className="w-full" disabled={isLoading}>
+              {isLoading && (
+                <ReloadIcon className="animate-spin h-4 w-4 mr-2" />
+              )}
+              Login
+            </Button>
           </div>
         </form>
       </CardContent>

@@ -32,6 +32,27 @@ const handler = NextAuth({
     }),
   ],
   adapter: PrismaAdapter(prisma),
+  callbacks: {
+    async jwt({ token, user, account }) {
+      if (user && account) {
+        return {
+          ...token,
+          user: {
+            id: user.id,
+            username: user.username,
+            email: user.email,
+            image: user.image ?? `https://avatar.vercel.sh/${user.username}`,
+            account,
+          },
+        };
+      }
+      return token;
+    },
+    async session({ session, token, user }) {
+      session.user = token.user;
+      return session;
+    },
+  },
 });
 
 export { handler as GET, handler as POST };
