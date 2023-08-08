@@ -1,9 +1,9 @@
 import prisma from "@/lib/db";
 
+import { hash } from "bcryptjs";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
-
   const res = await request.json();
 
   const {
@@ -18,27 +18,49 @@ export async function POST(request) {
     username,
   } = res;
 
-  console.log(res);
-
   const referrerUser = await prisma.user.findUnique({
     where: {
       username: referrer,
     },
   });
 
-  
+  if (!referrerUser) {
+    return NextResponse.json({
+      error: "Referrer not found",
+    });
+  }
 
-  // const updatedreferrerUser = await prisma.user.update({
-  //   where: {
-  //     id: referrerUser.id,
-  //   },
-  //   data: {
-  //     [position === "left" ? "leftReferralsIds" : "rightReferralsIds"]: [.]
-  // })
+  const hashedPassword = await hash(password, 10);
 
-  
+  const user = await prisma.user.create({
+    data: {
+      firstname,
+      lastname,
+      email,
+      password,
+      phone,
+      country,
+      referrerId: referrerUser.id,
+      position,
+      ancestorsId: [...referrerUser.ancestorsIds, referrerUser.id],
+      username,
+      password: hashedPassword,
+    },
+  });
+
+  const referrerUserUpdated = await prisma.user.update({
+    where: {
+      id: referrerUser.id,
+    },
+    data: {
+      [position === "left" ? "leftReferralsIds" : "rightReferralsIds"]:
+        position === "left"
+          ? [...referrerUser.leftReferralsIds, user.id]
+          : [...referrerUser.rightReferralsIds, user.id],
+    },
+  });
 
   return NextResponse.json({
-    ...request.body,
+    user,
   });
 }

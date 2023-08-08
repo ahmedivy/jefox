@@ -21,15 +21,14 @@ model Session {
 model User {
   id                String    @id @default(auto()) @map("_id") @db.ObjectId
   username          String    @unique
-  firstName         String?
-  lastName          String?
+  firstname         String?
+  lastname          String?
   email             String    @unique
   country           String?
   emailVerified     DateTime?
   image             String?
   sessions          Session[]
   password          String?
-  phonecode         String
   phone             String?
   referrerId        String?   @db.ObjectId
   referrer          User?     @relation("referredBy", fields: [referrerId], references: [id], onDelete: NoAction, onUpdate: NoAction)
@@ -38,4 +37,5 @@ model User {
   ancestorsIds      String[]
   leftReferralsIds  String[]
   rightReferralsIds String[]
+  position          String?
 }

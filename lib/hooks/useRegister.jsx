@@ -1,6 +1,8 @@
+import { useRouter } from "next/navigation";
+import { useDebounce } from "./useDebounce";
 import { useState, useEffect } from "react";
 
-import { useDebounce } from "./useDebounce";
+import { useToast } from "@/components/ui/use-toast";
 
 const initialFields = {
   username: "",
@@ -14,6 +16,9 @@ const initialFields = {
 };
 
 export default function useRegister() {
+  const toast = useToast();
+  const router = useRouter();
+
   const [error, setError] = useState(null);
   const [f, setF] = useState(initialFields);
   const [refUsername, setRefUsername] = useState("");
@@ -86,9 +91,28 @@ export default function useRegister() {
       body: JSON.stringify(body),
     });
 
-    console.log(body)
+    console.log(body);
 
-    // const data = await res.json();
+    const data = await res.json();
+
+    if (data.error) {
+      setError(data.error);
+      setIsLoading(false);
+      return;
+    }
+
+    setIsLoading(false);
+    setF(initialFields);
+    setRefUsername("");
+    setPosition("left");
+    setValidRef(false);
+    setTerms(false);
+
+    toast({
+      description: "Account created successfully",
+    });
+
+    router.push("/login");
   };
 
   return {
