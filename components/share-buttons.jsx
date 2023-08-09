@@ -8,8 +8,8 @@ function ShareButtons({ username }) {
   const { toast } = useToast();
 
   return (
-    <div className="grid gap-3 grid-cols-1 lg:grid-cols-2">
-      <div className="flex gap-2">
+    <div className="grid gap-3 grid-cols-1">
+      <div className="flex gap-2 lg:w-1/2">
         <Input
           value={`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/register?ref=${username}&position=left`}
         />
@@ -22,12 +22,12 @@ function ShareButtons({ username }) {
               description: "Copied link to clipboard",
             });
           }}
-          className="flex-shrink-0"
+          className="flex-shrink-0 w-[100px]"
         >
           Join Left
         </Button>
       </div>
-      <div className="flex gap-2">
+      <div className="flex gap-2 lg:w-1/2">
         <Input
           value={`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/register?ref=${username}&position=right`}
         />
@@ -40,7 +40,7 @@ function ShareButtons({ username }) {
               description: "Copied link to clipboard",
             });
           }}
-          className="flex-shrink-0"
+          className="flex-shrink-0 w-[100px]"
         >
           Join Right
         </Button>
