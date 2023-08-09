@@ -2,6 +2,8 @@ import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/lib/auth";
+import DashCard from "@/components/dash-card";
+import ShareButtons from "@/components/share-buttons";
 
 async function getReferrals(username) {
   const res = await fetch(
@@ -23,7 +25,14 @@ async function Page() {
   return (
     <main className="p-4">
       <h1 className="text-2xl font-bold pl-2">Referrals</h1>
-      <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-4 w-full gap-4 pt-8"></div>
+      <DashCard
+        title="Total Referrals"
+        value={`${referrals.lefts.length + referrals.rights.length} Users`}
+        subValue="Users that joined through your referral link"
+        className="w-full md:w-1/2 lg:w-1/4 mt-7"
+      />
+      <h1 className="text-2xl font-bold pl-2 my-4">Share Links</h1>
+      <ShareButtons username={session.user.username} />
     </main>
   );
 }
