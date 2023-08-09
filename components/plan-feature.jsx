@@ -2,11 +2,10 @@ import { AiFillQuestionCircle } from "react-icons/ai";
 import { IoCheckmarkDoneCircleSharp } from "react-icons/io5";
 
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 function PlanFeature({ name, price, description }) {
   return (
@@ -16,16 +15,14 @@ function PlanFeature({ name, price, description }) {
         <p className="">{name}</p>
         <p className="">$ {price}</p>
       </div>
-      <TooltipProvider>
-        <Tooltip>
-          <TooltipTrigger>
-            <AiFillQuestionCircle className="h-5 w-5 text-muted-foreground" />
-          </TooltipTrigger>
-          <TooltipContent>
-            <p className="wrap w-[200px]">{description}</p>
-          </TooltipContent>
-        </Tooltip>
-      </TooltipProvider>
+      <Popover>
+        <PopoverTrigger>
+          <AiFillQuestionCircle className="h-5 w-5 text-muted-foreground" />
+        </PopoverTrigger>
+        <PopoverContent className="p-2">
+          <p className="wrap w-[190px] text-sm text-jutify">{description}</p>
+        </PopoverContent>
+      </Popover>
     </div>
   );
 }

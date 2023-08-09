@@ -26,19 +26,21 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head />
-      <body className={cn(`min-h-screen`, font.className)}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <AuthProvider>
-            <div className="flex">
-              <Sidebar />
-              <div className="w-full">
-                <DashHeader />
-                {children}
+      <body className={cn(``, font.className)}>
+        <div className="minh-h-screen">
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <AuthProvider>
+              <div className="flex">
+                <Sidebar />
+                <div className="w-full">
+                  <DashHeader />
+                  {children}
+                </div>
               </div>
-            </div>
-            <Toaster />
-          </AuthProvider>
-        </ThemeProvider>
+              <Toaster />
+            </AuthProvider>
+          </ThemeProvider>
+        </div>
       </body>
     </html>
   );
