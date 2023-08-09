@@ -92,7 +92,7 @@ export function LoginCard() {
             {error && (
               <p className="text-red-500 text-sm text-center">{error}</p>
             )}
-            <Button className="w-full" disabled={isLoading}>
+            <Button className="w-full" disabled={isLoading} type="submit">
               {isLoading && (
                 <ReloadIcon className="animate-spin h-4 w-4 mr-2" />
               )}

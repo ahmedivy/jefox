@@ -15,12 +15,12 @@ function PlanFeature({ name, price, description }) {
         <p className="">{name}</p>
         <p className="">$ {price}</p>
       </div>
-      <Popover>
+      <Popover className="p-0 m-0">
         <PopoverTrigger>
           <AiFillQuestionCircle className="h-5 w-5 text-muted-foreground" />
         </PopoverTrigger>
-        <PopoverContent className="p-2">
-          <p className="wrap w-[190px] text-sm text-jutify">{description}</p>
+        <PopoverContent className="p-2 m-0">
+          <p className="text-sm">{description}</p>
         </PopoverContent>
       </Popover>
     </div>

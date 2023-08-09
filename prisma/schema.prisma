@@ -43,14 +43,14 @@ model User {
 }
 
 model Plan {
-  id          String   @id @default(cuid()) @map("_id")
-  name        String
-  description String
-  price       Float
-  roi         Float
-  duration    Int
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id                 String   @id @default(cuid()) @map("_id")
+  name               String
+  description        String?
+  price              Float
+  treeCommission     Float
+  referralCommission Float
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
 }
 
 model Transaction {

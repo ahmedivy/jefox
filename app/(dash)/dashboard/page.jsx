@@ -3,9 +3,9 @@ import { LuDollarSign } from "react-icons/lu";
 import { BsCreditCardFill } from "react-icons/bs";
 import { AiOutlineUserSwitch, AiFillBank } from "react-icons/ai";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import { getServerSession } from "next-auth";
+import DashCard from "@/components/dash-card";
 
 async function Page() {
   const session = await getServerSession(authOptions);
@@ -29,58 +29,30 @@ async function Page() {
     <main className="p-4">
       <h1 className="text-2xl font-bold pl-2">Dashboard</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-full gap-4 pt-8">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Balance</CardTitle>
-            <LuDollarSign />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">$ {`${user.balance}`}</div>
-            <p className="text-xs text-muted-foreground">
-              {user.balance * 180} Rs
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Referrals</CardTitle>
-            <AiOutlineUserSwitch />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">
-              {`${user.leftReferrals + user.rightReferrals}`} Users
-            </div>
-            <p className="text-xs text-muted-foreground">
-              {user.leftReferrals} Left, {user.rightReferrals} Right
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Total Deposited
-            </CardTitle>
-            <AiFillBank />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">$ {user.deposited}</div>
-            <p className="text-xs text-muted-foreground">
-              {user.deposited * 180} Rs
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">
-              Total Withdrawn
-            </CardTitle>
-            <BsCreditCardFill />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">$ {user.withdrawn}</div>
-            <p className="text-xs text-muted-foreground">{user.withdrawn} Rs</p>
-          </CardContent>
-        </Card>
+        <DashCard
+          title="Total Balance"
+          icon={<LuDollarSign />}
+          value={`$ ${user.balance}`}
+          subValue={`${user.balance * 180} Rs`}
+        />
+        <DashCard
+          title="Referrals"
+          icon={<AiOutlineUserSwitch />}
+          value={`${user.leftReferrals + user.rightReferrals} Users`}
+          subValue={`${user.leftReferrals} Left, ${user.rightReferrals} Right`}
+        />
+        <DashCard
+          title="Total Deposited"
+          icon={<AiFillBank />}
+          value={`$ ${user.deposited}`}
+          subValue={`${user.deposited * 180} Rs`}
+        />
+        <DashCard
+          title="Total Withdrawn"
+          icon={<BsCreditCardFill />}
+          value={`$ ${user.withdrawn}`}
+          subValue={`${user.withdrawn * 180} Rs`}
+        />
       </div>
     </main>
   );

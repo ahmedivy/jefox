@@ -1,14 +1,12 @@
+"use client";
+
 import Link from "next/link";
-import { useSession, signOut } from "next-auth/react";
+import { signOut } from "next-auth/react";
 
 import { Button } from "./ui/button";
 import ThemeToggle from "./theme-toggle";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
 
-async function NavButtons() {
-  const session = await getServerSession(authOptions);
-
+function NavButtons({ session }) {
   return (
     <div className="flex gap-x-3">
       <ThemeToggle />
