@@ -10,9 +10,9 @@ import {
 
 function PlanFeature({ name, price, description }) {
   return (
-    <div className="flex justify-between text-md">
-      <IoCheckmarkDoneCircleSharp className="h-6 w-6 text-green-500" />
-      <div className="flex gap-2 w-full px-4">
+    <div className="flex justify-between text-md md:text-md">
+      <IoCheckmarkDoneCircleSharp className="h-5 w-5 text-green-500 md:w-6 md:h-6" />
+      <div className="flex gap-1 md:gap-2 w-full px-4">
         <p className="">{name}</p>
         <p className="">$ {price}</p>
       </div>
@@ -22,7 +22,7 @@ function PlanFeature({ name, price, description }) {
             <AiFillQuestionCircle className="h-5 w-5 text-muted-foreground" />
           </TooltipTrigger>
           <TooltipContent>
-            <p>{description}</p>
+            <p className="wrap w-[200px]">{description}</p>
           </TooltipContent>
         </Tooltip>
       </TooltipProvider>

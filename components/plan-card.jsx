@@ -6,7 +6,7 @@ import { Button } from "./ui/button";
 
 function PlanCard() {
   return (
-    <Card className="h-[380px] py-10 px-3">
+    <Card className="h-[380px] py-10 md:px-3 px-1">
       <CardContent className="flex flex-col space-y-5">
         <h1 className="text-2xl font-semibold text-center">Gold</h1>
         <p className="text-4xl font-bold leading-6 text-center">$ 9.99</p>
