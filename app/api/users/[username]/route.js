@@ -11,8 +11,18 @@ export async function GET(request, { params }) {
   if (user) {
     return NextResponse.json({
       success: true,
-      user: user,
-    }); 
+      user: {
+        firstname: user.firstname,
+        lastname: user.lastname,
+        username: user.username,
+        email: user.email,
+        leftReferrals: user.leftReferralsIds.length,
+        rightReferrals: user.rightReferralsIds.length,
+        balance: user.balance,
+        deposited: user.deposited,
+        withdrawn: user.withdrawn,
+      },
+    });
   } else {
     return NextResponse.json({
       error: "User not found",

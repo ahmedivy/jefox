@@ -1,25 +1,29 @@
-"use client";
-
 import { redirect } from "next/navigation";
-import { useSession } from "next-auth/react";
 import { LuDollarSign } from "react-icons/lu";
 import { BsCreditCardFill } from "react-icons/bs";
 import { AiOutlineUserSwitch, AiFillBank } from "react-icons/ai";
 
-import { useToast } from "@/components/ui/use-toast";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
 
-function Page() {
-  const { toast } = useToast();
-  const { data: session, status } = useSession();
-
-  if (status === "unauthenticated") {
-    toast({
-      variant: "destructive",
-      description: "Sign in to access this page.",
-    });
+async function Page() {
+  const session = await getServerSession(authOptions);
+  if (!session) {
     redirect("/login");
   }
+
+  const res = await fetch(
+    `${process.env.NEXTAUTH_URL}/api/users/${session.user.username}`,
+    {
+      next: {
+        revalidate: 0,
+      },
+    }
+  );
+
+  const data = await res.json();
+  const user = data.user;
 
   return (
     <main className="p-4">
@@ -31,8 +35,10 @@ function Page() {
             <LuDollarSign />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">$45,231.89</div>
-            <p className="text-xs text-muted-foreground">34,234,534.53 Rs.</p>
+            <div className="text-2xl font-bold">$ {`${user.balance}`}</div>
+            <p className="text-xs text-muted-foreground">
+              {user.balance * 180} Rs
+            </p>
           </CardContent>
         </Card>
         <Card>
@@ -41,8 +47,12 @@ function Page() {
             <AiOutlineUserSwitch />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">3 Users</div>
-            <p className="text-xs text-muted-foreground">2 Left, 1 Right</p>
+            <div className="text-2xl font-bold">
+              {`${user.leftReferrals + user.rightReferrals}`} Users
+            </div>
+            <p className="text-xs text-muted-foreground">
+              {user.leftReferrals} Left, {user.rightReferrals} Right
+            </p>
           </CardContent>
         </Card>
         <Card>
@@ -53,8 +63,10 @@ function Page() {
             <AiFillBank />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">$45,231.89</div>
-            <p className="text-xs text-muted-foreground">34,234,534.53 Rs.</p>
+            <div className="text-2xl font-bold">$ {user.deposited}</div>
+            <p className="text-xs text-muted-foreground">
+              {user.deposited * 180} Rs
+            </p>
           </CardContent>
         </Card>
         <Card>
@@ -65,8 +77,8 @@ function Page() {
             <BsCreditCardFill />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">$45,231.89</div>
-            <p className="text-xs text-muted-foreground">34,234,534.53 Rs.</p>
+            <div className="text-2xl font-bold">$ {user.withdrawn}</div>
+            <p className="text-xs text-muted-foreground">{user.withdrawn} Rs</p>
           </CardContent>
         </Card>
       </div>
