@@ -14,17 +14,16 @@ function NavButtons() {
       <ThemeToggle />
       {status === "authenticated" ? (
         <>
-          <Button onClick={signOut} variant="outline">
+          <Button onClick={signOut} variant="ghost" className="hidden md:block">
             Sign out
           </Button>
-
           <Button asChild>
             <Link href="/dashboard">Dashboard</Link>
           </Button>
         </>
-      ) : (
+      ) : status === "loading" ? null : (
         <>
-          <Button asChild variant="outline">
+          <Button asChild variant="ghost" className="hidden md:block">
             <Link href="/register">Register</Link>
           </Button>
           <Button asChild>

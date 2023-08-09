@@ -19,21 +19,47 @@ model Session {
 }
 
 model User {
-  id                String    @id @default(auto()) @map("_id") @db.ObjectId
-  username          String    @unique
+  id                String        @id @default(auto()) @map("_id") @db.ObjectId
+  username          String        @unique
   firstname         String?
   lastname          String?
-  email             String    @unique
+  email             String        @unique
   country           String?
   emailVerified     DateTime?
   image             String?
   sessions          Session[]
   password          String?
   phone             String?
-  referrerId        String?   @db.ObjectId
-  createdAt         DateTime  @default(now())
+  referrerId        String?       @db.ObjectId
+  createdAt         DateTime      @default(now())
   ancestorsIds      String[]
   leftReferralsIds  String[]
   rightReferralsIds String[]
   position          String?
+  balance           Float         @default(0)
+  deposited         Float         @default(0)
+  withdrawn         Float         @default(0)
+  Transaction       Transaction[]
+}
+
+model Plan {
+  id          String   @id @default(cuid()) @map("_id")
+  name        String
+  description String
+  price       Float
+  roi         Float
+  duration    Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Transaction {
+  id        String   @id @default(cuid()) @map("_id")
+  userId    String   @db.ObjectId
+  amount    Float
+  type      String
+  duration  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

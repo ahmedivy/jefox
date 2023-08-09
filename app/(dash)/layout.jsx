@@ -36,7 +36,6 @@ export default function RootLayout({ children }) {
                 {children}
               </div>
             </div>
-            {children}
             <Toaster />
           </AuthProvider>
         </ThemeProvider>

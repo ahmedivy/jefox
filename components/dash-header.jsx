@@ -30,7 +30,6 @@ function DashHeader() {
             </div>
           </SheetContent>
         </Sheet>
-        <h1 className="text-3xl font-bold">Jefox</h1>
       </div>
 
       <div className="flex gap-4 pr-3">
