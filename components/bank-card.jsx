@@ -4,13 +4,20 @@ import Image from "next/image";
 import { Button } from "./ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import PlanFeature from "./plan-feature";
+import Link from "next/link";
 
-function BankCard({ name, image }) {
+function BankCard({ name, image, href }) {
   return (
     <Card className="h-[412px] py-10 md:px-3 px-1">
       <CardContent className="flex flex-col space-y-5">
         <div className="flex flex-col items-center justify-center p-6">
-          <Image src={image} alt={name} height={100} width={100} className="object-contain h-[80px] w-[140px]" />
+          <Image
+            src={image}
+            alt={name}
+            height={100}
+            width={100}
+            className="object-contain h-[80px] w-[140px]"
+          />
         </div>
         <h1 className="text-lg font-semibold text-center">
           Deposit with {name}
@@ -19,7 +26,9 @@ function BankCard({ name, image }) {
           <PlanFeature name="Transaction Charges" price="0" tooltip={false} />
           <PlanFeature name="Transaction Limit" price="3-64" tooltip={false} />
         </div>
-        <Button className="w-full">Deposit</Button>
+        <Button className="w-full" asChild>
+          <Link href={href}>Deposit</Link>
+        </Button>
       </CardContent>
     </Card>
   );
