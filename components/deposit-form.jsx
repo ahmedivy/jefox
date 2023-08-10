@@ -5,8 +5,10 @@ import { useEffect, useState } from "react";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Button } from "./ui/button";
+import Receipt from "./receipt";
+import Link from "next/link";
 
-function DepositForm() {
+function DepositForm({ method }) {
   const [amount, setAmount] = useState(null);
   const [error, setError] = useState(null);
 
@@ -37,35 +39,16 @@ function DepositForm() {
           )}
         </div>
 
-        <div className="relative my-4">
-          <div className="absolute inset-0 flex items-center">
-            <span className="w-full border-t" />
-          </div>
-          <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-background px-2 text-muted-foreground">
-              receipt
-            </span>
-          </div>
-        </div>
+        <Receipt amount={amount} />
 
-        <div className="flex items-center justify-between border-b-2 py-2">
-          <p className="text-sm">Amount ($)</p>
-          <p>{amount || 0}</p>
-        </div>
-        <div className="flex items-center justify-between border-b-2 py-2">
-          <p className="text-sm">Amount (PKR)</p>
-          <p>{amount * 180 || 0}</p>
-        </div>
-        <div className="flex items-center justify-between border-b-2 py-2">
-          <p className="text-sm">Charges ($)</p>
-          <p>{0}</p>
-        </div>
-        <div className="flex items-center justify-between border-b-2 py-2 text-green-500">
-          <p className="text-sm">Total Amount (PKR)</p>
-          <p>{amount * 180 || 0}</p>
-        </div>
-        <Button className="w-full font-semibold my-8" disabled={error !== null}>
-          Deposit
+        <Button
+          className="w-full font-semibold my-8"
+          disabled={error !== null}
+          asChild
+        >
+          <Link href={`/deposit/${method}/confirm/?amount=${amount}`}>
+            Confirm Deposit
+          </Link>
         </Button>
       </form>
     </div>

@@ -43,7 +43,7 @@ function DashNav() {
       {
         icon: RiLuggageDepositFill,
         label: "Deposit",
-        active: pathName === "/deposit",
+        active: pathName.startsWith("/deposit"),
         href: "/deposit",
       },
       {

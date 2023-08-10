@@ -26,7 +26,7 @@ async function Page({ params }) {
       <p className="text-muted-foreground text-md">
         Enter the amount you want to deposit
       </p>
-      <DepositForm />
+      <DepositForm method={method} />
     </main>
   );
 }

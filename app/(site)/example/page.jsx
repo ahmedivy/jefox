@@ -14,7 +14,6 @@ export default function Home() {
   };
 
   const { startUpload, isUploading } = useUploadThing(
-    // `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/uploadthing`,
     "imageUploader",
     {
       onClientUploadComplete: (files) => {
