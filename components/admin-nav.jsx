@@ -23,14 +23,14 @@ function AdminNav() {
       {
         icon: RiLuggageDepositFill,
         label: "Deposit",
-        active: pathName.startsWith("/admin/deposit"),
-        href: "/admin/deposit",
+        active: pathName.startsWith("/admin/deposits"),
+        href: "/admin/deposits",
       },
       {
         icon: BiMoneyWithdraw,
         label: "Withdrawal",
-        active: pathName.startsWith("/admin/withdraw"),
-        href: "/admin/withdraw",
+        active: pathName.startsWith("/admin/withdrawals"),
+        href: "/admin/withdrawals",
       },
       {
         icon: FaUserShield,
