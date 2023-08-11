@@ -40,17 +40,20 @@ model User {
   deposited         Float         @default(0)
   withdrawn         Float         @default(0)
   transactions      Transaction[]
+  planId            String?
+  plan              Plan?         @relation(fields: [planId], references: [id])
 }
 
 model Plan {
   id                 String   @id @default(cuid()) @map("_id")
-  name               String
+  name               String   @unique
   description        String?
   price              Float
   treeCommission     Float
   referralCommission Float
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
+  users              User[]
 }
 
 model Transaction {
