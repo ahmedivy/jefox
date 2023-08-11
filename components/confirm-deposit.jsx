@@ -60,6 +60,11 @@ function ConfirmDeposit({ method, username }) {
     },
     onUploadError: (error) => {
       console.log("upload error", error);
+      toast({
+        variant: "destructive",
+        desctiption: "Something bad happened. Please try again later.",
+      })
+      setIsLoading(false);
     },
   });
 

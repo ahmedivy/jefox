@@ -12,6 +12,16 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { capitalize, timeSince } from "@/lib/utils";
+
+async function getDeposits(username) {
+  const res = await fetch(
+    `${process.env.NEXTAUTH_URL}/api/users/${username}/transactions/deposits`
+  );
+  const data = await res.json();
+
+  return data.deposits;
+}
 
 async function Page() {
   const session = await getServerSession(authOptions);
@@ -19,6 +29,8 @@ async function Page() {
   if (!session) {
     redirect("/login");
   }
+
+  const deposits = await getDeposits(session.user.username);
 
   return (
     <main className="p-4 flex flex-col gap-5">
@@ -44,15 +56,25 @@ async function Page() {
             <TableHead>Status</TableHead>
             <TableHead>Method</TableHead>
             <TableHead className="text-right">Amount</TableHead>
+            <TableHead className="">Date</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow>
-            <TableCell className="font-medium">INV001</TableCell>
-            <TableCell>Paid</TableCell>
-            <TableCell>Credit Card</TableCell>
-            <TableCell className="text-right">$250.00</TableCell>
-          </TableRow>
+          {deposits.map((deposit, index) => {
+            return (
+              <TableRow key={deposit.id}>
+                <TableCell className="font-medium">{`INV${(index + 1)
+                  .toString()
+                  .padStart(3, "0")}`}</TableCell>
+                <TableCell>{capitalize(deposit.status)}</TableCell>
+                <TableCell>{capitalize(deposit.method)}</TableCell>
+                <TableCell className="text-right">{`$ ${deposit.amount}`}</TableCell>
+                <TableCell className="">
+                  {timeSince(deposit.createdAt)}
+                </TableCell>
+              </TableRow>
+            );
+          })}
         </TableBody>
       </Table>
     </main>

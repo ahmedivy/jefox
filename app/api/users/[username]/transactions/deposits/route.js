@@ -2,9 +2,9 @@ import { NextResponse } from "next/server";
 
 import prisma from "@/lib/db";
 
-export async function GET(request) {
+export async function GET(request, { params }) {
   const username = params.username;
-  const deposits = await prisma.plan.findMany({
+  const deposits = await prisma.transaction.findMany({
     where: {
       user: {
         username,
