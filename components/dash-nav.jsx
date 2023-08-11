@@ -49,7 +49,7 @@ function DashNav() {
       {
         icon: BiMoneyWithdraw,
         label: "Withdrawal",
-        active: pathName === "/withdraw",
+        active: pathName.startsWith("/withdraw"),
         href: "/withdraw",
       },
     ],
