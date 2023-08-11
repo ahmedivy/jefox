@@ -5,10 +5,16 @@ import { Button } from "./ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import PlanFeature from "./plan-feature";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
-function BankCard({ name, image, href }) {
+function BankCard({ name, image, href, type = "deposit" }) {
   return (
-    <Card className="h-[412px] py-10 md:px-3 px-1">
+    <Card
+      className={cn(
+        "py-10 md:px-3 px-1",
+        type === "deposit" ? "h-[412px]" : "h-[435px]"
+      )}
+    >
       <CardContent className="flex flex-col space-y-5">
         <div className="flex flex-col items-center justify-center p-6">
           <Image
@@ -25,9 +31,16 @@ function BankCard({ name, image, href }) {
         <div className="flex flex-col gap-2 items-center py-4">
           <PlanFeature name="Transaction Charges" price="0" tooltip={false} />
           <PlanFeature name="Transaction Limit" price="3-64" tooltip={false} />
+          {type === "withdraw" && (
+            <PlanFeature
+              name="Processing Time"
+              message={"24 Hours"}
+              tooltip={false}
+            />
+          )}
         </div>
         <Button className="w-full" asChild>
-          <Link href={href}>Deposit</Link>
+          <Link href={href}>{type === "deposit" ? "Deposit" : "Withdraw"}</Link>
         </Button>
       </CardContent>
     </Card>

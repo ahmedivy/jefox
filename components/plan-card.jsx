@@ -72,7 +72,6 @@ function PlanCard({ price, treeCommission, referralCommission, name }) {
     );
 
     const data = await res.json();
-
     if (data.error) {
       toast({
         variant: "destructive",
@@ -98,12 +97,12 @@ function PlanCard({ price, treeCommission, referralCommission, name }) {
           <PlanFeature
             name="Tree Commission"
             price={treeCommission}
-            description="This is the commission you get when someone from your tree subscribes to a plan."
+            description="When someone from your below tree subscribe this plan, You will get this amount as tree commission."
           />
           <PlanFeature
             name="Referral Commission"
             price={referralCommission}
-            description="This is the commission you get when someone from your referrals subscribes to a plan."
+            description="When your referred user subscribe in ANY PLAN, you will get this amount."
           />
         </div>
         <Button className="w-full" onClick={handleSubscribe} disabled={loading}>
