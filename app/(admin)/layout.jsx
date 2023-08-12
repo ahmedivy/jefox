@@ -14,7 +14,7 @@ import AdminHeader from "@/components/admin-header";
 import AdminSidebar from "@/components/admin-sidebar";
 
 const font = Inter({ subsets: ["latin"] });
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: {
@@ -33,6 +33,10 @@ export default async function RootLayout({ children }) {
 
   if (!session) {
     redirect("/login");
+  }
+
+  if (session.user.username !== "admin") {
+    redirect("/");
   }
 
   return (

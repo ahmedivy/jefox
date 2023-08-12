@@ -24,7 +24,13 @@ export const metadata = {
 
 export const dynamic = "force-dynamic";
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    redirect("/login");
+  }
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head />
@@ -35,7 +41,7 @@ export default function RootLayout({ children }) {
               <div className="flex">
                 <Sidebar />
                 <div className="w-full">
-                  <DashHeader />
+                  <DashHeader user={session.user} />
                   {children}
                 </div>
               </div>

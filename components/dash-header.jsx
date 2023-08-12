@@ -9,12 +9,7 @@ import { UserNav } from "./user-nav";
 import ThemeToggle from "./theme-toggle";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
-function DashHeader() {
-  const { data: session, status } = useSession();
-
-  const user = session?.user;
-  const { image, username, email } = user || {};
-
+function DashHeader({ user }) {
   return (
     <header className="w-full px-4 py-2 flex items-center h-16 justify-between md:justify-end">
       <div className="flex md:hidden space-x-4">
@@ -34,14 +29,12 @@ function DashHeader() {
 
       <div className="flex gap-4 pr-3 items-center justify-center">
         <ThemeToggle />
-        {status === "authenticated" ? (
-          <UserNav
-            img={image}
-            username={username}
-            email={email}
-            signOut={() => signOut({ callbackUrl: "/" })}
-          />
-        ) : null}
+        <UserNav
+          img={user.image}
+          username={user.username}
+          email={user.email}
+          signOut={() => signOut({ callbackUrl: "/" })}
+        />
       </div>
     </header>
   );
