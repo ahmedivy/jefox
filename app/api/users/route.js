@@ -5,7 +5,5 @@ import { NextResponse } from "next/server";
 export async function GET(request) {
   const users = await prisma.user.findMany({});
 
-  return NextResponse.json({
-    users,
-  });
+  return NextResponse.json(users);
 }

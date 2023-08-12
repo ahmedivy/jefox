@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { Skeleton } from "../ui/skeleton";
 
 import {
@@ -9,9 +10,9 @@ import {
   TableCell,
 } from "@/components/ui/table";
 
-function LoadingTable({ cells = 5 }) {
+function LoadingTable({ cells = 5, rows = 10, className = "" }) {
   return (
-    <Table className="w-full lg:w-1/2 my-4">
+    <Table className={cn("w-full lg:w-1/2 p-4", className)}>
       <TableHeader>
         <TableRow>
           {Array(cells)
@@ -24,7 +25,7 @@ function LoadingTable({ cells = 5 }) {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {Array(10)
+        {Array(rows)
           .fill()
           .map((_, index) => (
             <TableRow key={index}>
