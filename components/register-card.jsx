@@ -23,8 +23,12 @@ import {
 } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useRegister } from "@/lib/hooks/useRegister";
+import { useSearchParams } from "next/navigation";
 
 export function RegisterCard() {
+  const ref = useSearchParams().get("ref") || "";
+  const pos = useSearchParams().get("position") || "left";
+
   const {
     f,
     handleChange,
@@ -39,7 +43,7 @@ export function RegisterCard() {
     handleTerms,
     terms,
     toast,
-  } = useRegister();
+  } = useRegister(ref, pos);
 
   return (
     <Card className="mx-1 md:mx-0 min-w-full md:min-w-[740px]">

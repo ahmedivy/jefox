@@ -15,14 +15,14 @@ const initialFields = {
   country: "",
 };
 
-export default function useRegister() {
+export default function useRegister(ref, pos) {
   const { toast } = useToast();
   const router = useRouter();
 
   const [error, setError] = useState(null);
   const [f, setF] = useState(initialFields);
-  const [refUsername, setRefUsername] = useState("");
-  const [position, setPosition] = useState("left");
+  const [refUsername, setRefUsername] = useState(ref);
+  const [position, setPosition] = useState(pos);
   const [isLoading, setIsLoading] = useState(false);
   const [validRef, setValidRef] = useState(false);
   const [terms, setTerms] = useState(false);
