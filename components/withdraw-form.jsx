@@ -52,7 +52,7 @@ function WithdrawForm({ method, balance, username }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          amount: amount,
+          amount: amount + amount * 0.06,
           account: account,
           accountNumber: accountNumber,
           method: method,
@@ -154,7 +154,7 @@ function WithdrawForm({ method, balance, username }) {
         </div>
       </div>
 
-      <Receipt amount={amount} />
+      <Receipt amount={amount} type="withdraw" />
 
       {mainError ? (
         <p className="text-sm font-semibold text-red-500 pl-1 text-center my-3">

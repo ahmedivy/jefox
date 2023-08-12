@@ -29,7 +29,11 @@ function BankCard({ name, image, href, type = "deposit" }) {
           {type === "withdraw" ? "Withdraw" : "Deposit"} with {name}
         </h1>
         <div className="flex flex-col gap-2 items-center py-4">
-          <PlanFeature name="Transaction Charges" price="0" tooltip={false} />
+          <PlanFeature
+            name="Transaction Charges"
+            price={type === "withdraw" ? "6%" : "0"}
+            tooltip={false}
+          />
           <PlanFeature name="Transaction Limit" price="3-64" tooltip={false} />
           {type === "withdraw" && (
             <PlanFeature
