@@ -1,12 +1,14 @@
 import "../globals.css";
 import { Inter } from "next/font/google";
+import { getServerSession } from "next-auth";
 
 import { cn } from "@/lib/utils";
+import { authOptions } from "@/lib/auth";
+import Sidebar from "@/components/sidebar";
 import { Toaster } from "@/components/ui/toaster";
+import DashHeader from "@/components/dash-header";
 import AuthProvider from "@/components/auth-provider";
 import ThemeProvider from "@/components/theme-provider";
-import DashHeader from "@/components/dash-header";
-import Sidebar from "@/components/sidebar";
 
 const font = Inter({ subsets: ["latin"] });
 
