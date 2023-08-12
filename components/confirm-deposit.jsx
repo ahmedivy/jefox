@@ -3,13 +3,13 @@
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 
+import Image from "next/image";
 import Receipt from "./receipt";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
-import { useUploadThing } from "@/lib/uploadthing";
-import { useToast } from "./ui/use-toast";
 import { Button } from "./ui/button";
-import Image from "next/image";
+import { useToast } from "./ui/use-toast";
+import { useUploadThing } from "@/lib/uploadthing";
 
 function ConfirmDeposit({ method, username }) {
   const { toast } = useToast();
@@ -63,7 +63,7 @@ function ConfirmDeposit({ method, username }) {
       toast({
         variant: "destructive",
         desctiption: "Something bad happened. Please try again later.",
-      })
+      });
       setIsLoading(false);
     },
   });

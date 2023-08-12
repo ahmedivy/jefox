@@ -9,26 +9,32 @@ import Receipt from "./receipt";
 import Link from "next/link";
 
 function DepositForm({ method }) {
-  const [amount, setAmount] = useState(null);
+  const [amount, setAmount] = useState(0);
   const [error, setError] = useState(null);
+  const [isDisable, setIsDisable] = useState(true);
 
   useEffect(() => {
-    if (amount >= 3 && amount <= 64) {
-      setError(null);
+    if (amount < 3) {
+      setError("Amount must be greater than 2");
+      setIsDisable(true);
+    } else if (amount > 65) {
+      setError("Amount must be less than 65");
+      setIsDisable(true);
     } else {
-      setError("Amount must be between 3 and 64");
+      setError(null);
+      setIsDisable(false);
     }
   }, [amount]);
 
   return (
     <div className="w-full md:w-[380px]">
-      <form>
         <div className="flex flex-col w-full gap-2">
           <Label className="pl-1">Amount</Label>
           <Input
             type="number"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
+            required
           />
           {error ? (
             <p className="text-sm text-red-500 pl-1">{error}</p>
@@ -43,14 +49,12 @@ function DepositForm({ method }) {
 
         <Button
           className="w-full font-semibold my-8"
-          disabled={error !== null}
-          asChild
+          disabled={isDisable}
         >
           <Link href={`/deposit/${method}/confirm/?amount=${amount}`}>
             Confirm Deposit
           </Link>
         </Button>
-      </form>
     </div>
   );
 }

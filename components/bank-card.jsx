@@ -26,7 +26,7 @@ function BankCard({ name, image, href, type = "deposit" }) {
           />
         </div>
         <h1 className="text-lg font-semibold text-center">
-          Deposit with {name}
+          {type === "withdraw" ? "Withdraw" : "Deposit"} with {name}
         </h1>
         <div className="flex flex-col gap-2 items-center py-4">
           <PlanFeature name="Transaction Charges" price="0" tooltip={false} />

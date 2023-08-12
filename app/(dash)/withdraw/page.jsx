@@ -14,13 +14,13 @@ import {
 } from "@/components/ui/table";
 import { capitalize, timeSince } from "@/lib/utils";
 
-async function getDeposits(username) {
+async function getWithdrawals(username) {
   const res = await fetch(
-    `${process.env.NEXTAUTH_URL}/api/users/${username}/transactions/deposits`
+    `${process.env.NEXTAUTH_URL}/api/users/${username}/transactions/withdrawals`
   );
   const data = await res.json();
 
-  return data.deposits;
+  return data.withdrawals;
 }
 
 async function Page() {
@@ -30,7 +30,7 @@ async function Page() {
     redirect("/login");
   }
 
-  const deposits = await getDeposits(session.user.username);
+  const withdrawals = await getWithdrawals(session.user.username);
 
   return (
     <main className="p-4 flex flex-col gap-5">
@@ -39,40 +39,44 @@ async function Page() {
         <BankCard
           name="Jazz Cash"
           image="/jazzcash.png"
-          href="/deposit/jazzcash"
+          href="/withdraw/jazzcash"
           type="withdraw"
         />
         <BankCard
           name="Easy Paisa"
           image="/easypaisa.png"
-          href="/deposit/easypaisa"
+          href="/withdraw/easypaisa"
           type="withdraw"
         />
       </div>
       <h1 className="text-2xl font-bold pl-2">History</h1>
       <Table className="w-full lg:w-1/2">
-        <TableCaption>A list of your all Deposited Transactions.</TableCaption>
+        <TableCaption>A list of your all Withdrawal Transactions.</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead className="">Invoice</TableHead>
             <TableHead>Status</TableHead>
             <TableHead>Method</TableHead>
+            <TableHead>Account</TableHead>
+            <TableHead>Number</TableHead>
             <TableHead className="text-right">Amount</TableHead>
             <TableHead className="">Date</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {deposits.map((deposit, index) => {
+          {withdrawals.map((withdrawal, index) => {
             return (
-              <TableRow key={deposit.id}>
+              <TableRow key={withdrawal.id}>
                 <TableCell className="font-medium">{`INV${(index + 1)
                   .toString()
                   .padStart(3, "0")}`}</TableCell>
-                <TableCell>{capitalize(deposit.status)}</TableCell>
-                <TableCell>{capitalize(deposit.method)}</TableCell>
-                <TableCell className="text-right">{`$ ${deposit.amount}`}</TableCell>
+                <TableCell>{capitalize(withdrawal.status)}</TableCell>
+                <TableCell>{capitalize(withdrawal.method)}</TableCell>
+                <TableCell>{capitalize(withdrawal.account)}</TableCell>
+                <TableCell>{withdrawal.accountNumber}</TableCell>
+                <TableCell className="text-right">{`$ ${withdrawal.amount}`}</TableCell>
                 <TableCell className="">
-                  {timeSince(deposit.createdAt)}
+                  {timeSince(withdrawal.createdAt)}
                 </TableCell>
               </TableRow>
             );

@@ -1,8 +1,7 @@
-import { redirect, useSearchParams } from "next/navigation";
+import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/lib/auth";
-import DepositForm from "@/components/deposit-form";
 import ConfirmDeposit from "@/components/confirm-deposit";
 
 async function Page({ params }) {
