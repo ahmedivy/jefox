@@ -67,6 +67,8 @@ export async function POST(request) {
   }
 
   for (const ancestorId of user.ancestorsIds) {
+    if (ancestorId === user.referrerId) continue;
+
     const ancestor = await prisma.user.findUnique({
       where: {
         id: ancestorId,
