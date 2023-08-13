@@ -21,6 +21,8 @@ export const metadata = {
   ],
 };
 
+export const revalidate = 0;
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
