@@ -8,6 +8,7 @@ import { RiLuggageDepositFill } from "react-icons/ri";
 import { BiMoneyWithdraw } from "react-icons/bi";
 import { usePathname } from "next/navigation";
 import SidebarItem from "./sidebar-item";
+import Link from "next/link";
 
 function AdminNav() {
   const router = useRouter();
@@ -47,13 +48,14 @@ function AdminNav() {
       <h1 className="text-2xl font-bold mb-8 px-3">Jefox</h1>
       <div className="flex flex-col space-y-2">
         {routes.map((route) => (
-          <SidebarItem
-            key={route.href}
-            icon={route.icon}
-            label={route.label}
-            active={route.active}
-            onClick={() => router.push(route.href)}
-          />
+          <Link href={route.href} key={route.href} prefetch={false}>
+            <SidebarItem
+              key={route.href}
+              icon={route.icon}
+              label={route.label}
+              active={route.active}
+            />
+          </Link>
         ))}
       </div>
     </nav>
