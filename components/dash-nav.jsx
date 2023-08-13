@@ -58,7 +58,10 @@ function DashNav() {
 
   return (
     <nav>
-      <h1 className="text-2xl font-bold mb-8 px-3">Jefox</h1>
+      <h1 className="text-3xl font-bold mb-8 px-3 text-primary">
+        Jefox
+        <span className=" text-sm text-foreground italic"> MARKETING</span>
+      </h1>
       <div className="flex flex-col space-y-2">
         {routes.map((route) => (
           <SidebarItem

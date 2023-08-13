@@ -7,7 +7,10 @@ async function Header() {
 
   return (
     <header className="container flex items-center h-16 justify-between">
-      <h1 className="text-3xl font-bold">Jefox</h1>
+      <h1 className="text-3xl font-bold my-4 px-2 text-primary ">
+        Jefox
+        <span className=" text-sm text-foreground italic"> MARKETING</span>
+      </h1>
 
       <NavButtons session={session} />
     </header>
