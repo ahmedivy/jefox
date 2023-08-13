@@ -8,14 +8,16 @@ import {
   TableBody,
   TableCell,
 } from "@/components/ui/table";
-import { capitalize, timeSince } from "@/lib/utils";
+import { timeSince } from "@/lib/utils";
 import Link from "next/link";
 
 async function getData() {
   const res = await fetch(
     `${process.env.NEXTAUTH_URL}/api/transactions/withdraw/`,
     {
-      cache: "no-store",
+      next: {
+        revalidate: 0,
+      },
     }
   );
   const data = await res.json();
@@ -59,7 +61,7 @@ async function Page() {
                     .toString()
                     .padStart(3, "0")}`}</TableCell>
                   <TableCell>{`@${withdrawal.user.username}`}</TableCell>
-                  <TableCell className="text-right">{`$ ${withdrawal.amount}`}</TableCell>
+                  <TableCell className="text-right">{`$ ${Number(withdrawal.amount) - Number(withdrawal.amount) * 0.06}`}</TableCell>
                   <TableCell className="">{withdrawal.account}</TableCell>
                   <TableCell className="">{withdrawal.accountNumber}</TableCell>
                   <TableCell className="">
@@ -108,7 +110,7 @@ async function Page() {
                     .toString()
                     .padStart(3, "0")}`}</TableCell>
                   <TableCell>{`@${withdrawal.user.username}`}</TableCell>
-                  <TableCell className="text-right">{`$ ${withdrawal.amount}`}</TableCell>
+                  <TableCell className="text-right">{`$ ${Number(withdrawal.amount) - Number(withdrawal.amount) * 0.06}`}</TableCell>
                   <TableCell className="">{withdrawal.account}</TableCell>
                   <TableCell className="">{withdrawal.accountNumber}</TableCell>
                   <TableCell className="">

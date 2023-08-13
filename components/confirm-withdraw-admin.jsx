@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { revalidatePath } from "next/cache";
 import { useRouter } from "next/navigation";
 
 function ConfirmWithdrawAdmin({ id }) {
@@ -21,18 +22,19 @@ function ConfirmWithdrawAdmin({ id }) {
     const data = await res.json();
 
     router.push("/admin/withdrawals");
+    revalidatePath("/admin/withdrawals");
   };
   return (
     <div className="flex w-full my-4 gap-2 lg:w-1/2">
       <Button
         className="text-white bg-red-500 flex-grow"
-        onClick={() => handleSubmit("confirm")}
+        onClick={() => handleSubmit("reject")}
       >
         Cancel Transaction
       </Button>
       <Button
         className="text-white bg-green-500 flex-grow"
-        onClick={() => handleSubmit("reject")}
+        onClick={() => handleSubmit("confirm")}
       >
         Confirm Transaction
       </Button>

@@ -45,7 +45,7 @@ export async function PUT(request, { params }) {
       },
       data: {
         balance: {
-          decrement: transaction.amount,
+          increment: transaction.amount,
         },
         withdrawn: {
           decrement: transaction.amount,
