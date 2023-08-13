@@ -175,10 +175,10 @@ function WithdrawForm({ method, balance, username }) {
           <DialogHeader>
             <DialogTitle>Are you absolutely sure?</DialogTitle>
             <DialogDescription>
-              This action cannot be undone. This will remove the $ {amount} from
-              your account. Please ensure that you have entered the correct
-              account details. Our representatives will complete your request in
-              24 Hours.
+              This action cannot be undone. This will remove the ${" "}
+              {amount + amount * 0.06} from your account. Please ensure that you
+              have entered the correct account details. Our representatives will
+              complete your request in 24 Hours.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
