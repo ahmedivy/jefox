@@ -86,7 +86,7 @@ export function RegisterCard() {
                   ? "Username of your referrer"
                   : validRef
                   ? "Referrer found"
-                  : "Referrer not found"}
+                  : "Referrer not valid"}
               </p>
             </div>
             <div className="grid gap-2">

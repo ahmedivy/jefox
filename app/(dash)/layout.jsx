@@ -1,6 +1,7 @@
 import "../globals.css";
 import { Inter } from "next/font/google";
 import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import { authOptions } from "@/lib/auth";
