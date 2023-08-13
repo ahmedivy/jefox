@@ -6,7 +6,9 @@ import AdminCard from "@/components/admin-card";
 
 async function getData() {
   const res = await fetch(`${process.env.NEXTAUTH_URL}/api/admin`, {
-    cache: "no-store",
+    next: {
+      revalidate: 0,
+    },
   });
   const data = await res.json();
   return data;

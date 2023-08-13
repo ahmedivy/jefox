@@ -24,6 +24,8 @@ async function getData() {
   return data;
 }
 
+export const revalidate = 0;
+
 async function Page() {
   const data = await getData();
 
@@ -61,7 +63,9 @@ async function Page() {
                     .toString()
                     .padStart(3, "0")}`}</TableCell>
                   <TableCell>{`@${withdrawal.user.username}`}</TableCell>
-                  <TableCell className="text-right">{`$ ${Number(withdrawal.amount) - Number(withdrawal.amount) * 0.06}`}</TableCell>
+                  <TableCell className="text-right">{`$ ${
+                    Number(withdrawal.amount) - Number(withdrawal.amount) * 0.06
+                  }`}</TableCell>
                   <TableCell className="">{withdrawal.account}</TableCell>
                   <TableCell className="">{withdrawal.accountNumber}</TableCell>
                   <TableCell className="">
@@ -110,7 +114,9 @@ async function Page() {
                     .toString()
                     .padStart(3, "0")}`}</TableCell>
                   <TableCell>{`@${withdrawal.user.username}`}</TableCell>
-                  <TableCell className="text-right">{`$ ${Number(withdrawal.amount) - Number(withdrawal.amount) * 0.06}`}</TableCell>
+                  <TableCell className="text-right">{`$ ${
+                    Number(withdrawal.amount) - Number(withdrawal.amount) * 0.06
+                  }`}</TableCell>
                   <TableCell className="">{withdrawal.account}</TableCell>
                   <TableCell className="">{withdrawal.accountNumber}</TableCell>
                   <TableCell className="">

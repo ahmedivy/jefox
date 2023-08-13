@@ -22,6 +22,8 @@ async function getData() {
   return data;
 }
 
+export const revalidate = 0;
+
 async function Page() {
   const data = await getData();
 

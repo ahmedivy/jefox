@@ -12,6 +12,8 @@ async function getUsers() {
   return await res.json();
 }
 
+export const revalidate = 0;
+
 async function Page() {
   const users = await getUsers();
 
