@@ -14,6 +14,9 @@ import AdminHeader from "@/components/admin-header";
 import AdminSidebar from "@/components/admin-sidebar";
 
 const font = Inter({ subsets: ["latin"] });
+
+export const dynamic = "force-dynamic";
+
 export const revalidate = 0;
 
 export const metadata = {
