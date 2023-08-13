@@ -10,9 +10,9 @@ import { BiMoneyWithdraw } from "react-icons/bi";
 import { TbBinaryTree } from "react-icons/tb";
 import { usePathname } from "next/navigation";
 import SidebarItem from "./sidebar-item";
+import Link from "next/link";
 
 function DashNav() {
-  const router = useRouter();
   const pathName = usePathname();
   const routes = useMemo(
     () => [
@@ -64,13 +64,13 @@ function DashNav() {
       </h1>
       <div className="flex flex-col space-y-2">
         {routes.map((route) => (
-          <SidebarItem
-            key={route.href}
-            icon={route.icon}
-            label={route.label}
-            active={route.active}
-            onClick={() => router.push(route.href)}
-          />
+          <Link href={route.href} key={route.href}>
+            <SidebarItem
+              icon={route.icon}
+              label={route.label}
+              active={route.active}
+            />
+          </Link>
         ))}
       </div>
     </nav>
