@@ -52,7 +52,7 @@ function WithdrawForm({ method, balance, username }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          amount: amount + amount * 0.06,
+          amount: Number(amount) + Number(amount) * 0.06,
           account: account,
           accountNumber: accountNumber,
           method: method,
@@ -176,9 +176,9 @@ function WithdrawForm({ method, balance, username }) {
             <DialogTitle>Are you absolutely sure?</DialogTitle>
             <DialogDescription>
               This action cannot be undone. This will remove the ${" "}
-              {amount + amount * 0.06} from your account. Please ensure that you
-              have entered the correct account details. Our representatives will
-              complete your request in 24 Hours.
+              {Number(amount) + Number(amount) * 0.06} from your account. Please
+              ensure that you have entered the correct account details. Our
+              representatives will complete your request in 24 Hours.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>

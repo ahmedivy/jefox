@@ -24,20 +24,20 @@ function Receipt({ amount, type = "deposit" }) {
       </div>
       <div className="flex items-center justify-between border-b-2 py-2">
         <p className="text-sm">Charges ($)</p>
-        <p>{type === "deposit" ? 0 : amount * 0.06}</p>
+        <p>{type === "deposit" ? 0 : Number(amount) * 0.06}</p>
       </div>
       <div className="flex items-center justify-between border-b-2 py-2 text-green-500">
         <p className="text-sm">Total Amount (PKR)</p>
         <p>
           {(type === "deposit"
             ? amount * 180
-            : amount * 180 + amount * 0.06 * 180) || 0}
+            : amount * 180 + Number(amount) * 0.06 * 180) || 0}
         </p>
       </div>
       {type === "deposit" ? null : (
         <div className="flex items-center justify-between border-b-2 py-2 text-green-500">
           <p className="text-sm">Total Amount ($)</p>
-          <p>{amount + (amount * 0.06) || 0}</p>
+          <p>{Number(amount) + Number(amount) * 0.06 || 0}</p>
         </div>
       )}
     </>
