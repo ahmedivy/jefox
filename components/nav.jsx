@@ -2,18 +2,17 @@
 
 import Link from "next/link";
 import { signOut } from "next-auth/react";
-
 import { Button } from "./ui/button";
-import ThemeToggle from "./theme-toggle";
-import { cn } from "@/lib/utils";
 
-function NavButtons({ session, className = "" }) {
+function Nav({ session }) {
   return (
-    <div className={cn("flex gap-x-3", className)}>
-      {className == "" && <ThemeToggle />}
+    <div className="flex flex-col space-y-3 pt-8">
+      <Button variant="ghost">Home</Button>
+      <Button variant="ghost">Features</Button>
+      <Button variant="ghost">Community</Button>
       {session ? (
         <>
-          <Button onClick={signOut} variant="ghost" className="hidden md:block">
+          <Button onClick={signOut} variant="ghost">
             Sign out
           </Button>
           <Button asChild>
@@ -22,7 +21,7 @@ function NavButtons({ session, className = "" }) {
         </>
       ) : (
         <>
-          <Button asChild variant="ghost" className="hidden md:block">
+          <Button asChild variant="ghost">
             <Link href="/register">Register</Link>
           </Button>
           <Button asChild>
@@ -34,4 +33,4 @@ function NavButtons({ session, className = "" }) {
   );
 }
 
-export default NavButtons;
+export default Nav;

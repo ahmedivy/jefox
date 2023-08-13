@@ -37,7 +37,7 @@ function Receipt({ amount, type = "deposit" }) {
       {type === "deposit" ? null : (
         <div className="flex items-center justify-between border-b-2 py-2 text-green-500">
           <p className="text-sm">Total Amount ($)</p>
-          <p>{amount * 180 + amount * 180 * 0.06 || 0}</p>
+          <p>{amount + amount * 0.06 || 0}</p>
         </div>
       )}
     </>
