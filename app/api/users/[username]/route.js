@@ -21,7 +21,38 @@ export async function GET(request, { params }) {
         balance: user.balance,
         deposited: user.deposited,
         withdrawn: user.withdrawn,
+        country: user.country,
+        phone: user.phone,
       },
+    });
+  } else {
+    return NextResponse.json({
+      error: "User not found",
+    });
+  }
+}
+
+export async function PUT(request, { params }) {
+  const username = params.username;
+  const user = await prisma.user.findUnique({
+    where: {
+      username,
+    },
+  });
+  if (user) {
+    const { firstname, lastname, country } = await request.json();
+    await prisma.user.update({
+      where: {
+        username,
+      },
+      data: {
+        firstname,
+        lastname,
+        country,
+      },
+    });
+    return NextResponse.json({
+      success: true,
     });
   } else {
     return NextResponse.json({
