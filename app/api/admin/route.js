@@ -2,6 +2,8 @@ import prisma from "@/lib/db";
 
 import { NextResponse } from "next/server";
 
+export const revalidate = 0;
+
 export async function GET(req) {
   const getUsersCount = async () => {
     const usersCount = await prisma.user.count();

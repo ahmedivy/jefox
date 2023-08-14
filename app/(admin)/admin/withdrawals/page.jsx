@@ -15,9 +15,7 @@ async function getData() {
   const res = await fetch(
     `${process.env.NEXTAUTH_URL}/api/transactions/withdraw/`,
     {
-      next: {
-        revalidate: 0,
-      },
+      cache: "no-store",
     }
   );
   const data = await res.json();

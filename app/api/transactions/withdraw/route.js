@@ -45,3 +45,5 @@ export async function GET(request) {
     completedWithdrawals,
   });
 }
+
+export const revalidate = 0;

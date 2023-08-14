@@ -45,3 +45,5 @@ export async function GET(request) {
     completedDeposits,
   });
 }
+
+export const revalidate = 0;

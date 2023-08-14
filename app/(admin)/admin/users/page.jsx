@@ -8,7 +8,9 @@ import {
 } from "@/components/ui/table";
 
 async function getUsers() {
-  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/users`);
+  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/users`, {
+    cache: "no-store",
+  });
   return await res.json();
 }
 
