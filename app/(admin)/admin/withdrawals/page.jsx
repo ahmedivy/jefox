@@ -61,9 +61,9 @@ async function Page() {
                     .toString()
                     .padStart(3, "0")}`}</TableCell>
                   <TableCell>{`@${withdrawal.user.username}`}</TableCell>
-                  <TableCell className="text-right">{`$ ${
+                  <TableCell className="text-right">{`$ ${Math.round(
                     Number(withdrawal.amount) - Number(withdrawal.amount) * 0.06
-                  }`}</TableCell>
+                  )}`}</TableCell>
                   <TableCell className="">{withdrawal.account}</TableCell>
                   <TableCell className="">{withdrawal.accountNumber}</TableCell>
                   <TableCell className="">
@@ -112,9 +112,9 @@ async function Page() {
                     .toString()
                     .padStart(3, "0")}`}</TableCell>
                   <TableCell>{`@${withdrawal.user.username}`}</TableCell>
-                  <TableCell className="text-right">{`$ ${
+                  <TableCell className="text-right">{`$ ${Math.round(
                     Number(withdrawal.amount) - Number(withdrawal.amount) * 0.06
-                  }`}</TableCell>
+                  )}`}</TableCell>
                   <TableCell className="">{withdrawal.account}</TableCell>
                   <TableCell className="">{withdrawal.accountNumber}</TableCell>
                   <TableCell className="">

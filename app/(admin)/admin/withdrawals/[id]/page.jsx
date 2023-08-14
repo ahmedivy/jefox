@@ -46,7 +46,10 @@ async function Page({ params }) {
           </TableRow>
           <TableRow>
             <TableCell className="font-medium">Amount ($)</TableCell>
-            <TableCell>{`$ ${transaction.amount}`}</TableCell>
+            <TableCell>{`$ ${Math.round(
+              Number(transaction.amount) - Number(transaction.amount) * 0.06,
+              2
+            )}`}</TableCell>
           </TableRow>
           <TableRow>
             <TableCell className="font-medium">Amount (PKR)</TableCell>
