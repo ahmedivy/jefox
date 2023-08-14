@@ -73,9 +73,9 @@ export function LoginCard() {
               <Label htmlFor="username">Username</Label>
               <Input
                 id="username"
-                type="text"
+                type="username"
                 required
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={(e) => setUsername(e.target.value.toLowerCase())}
                 value={username}
               />
             </div>

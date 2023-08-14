@@ -68,7 +68,7 @@ export function RegisterCard() {
                 type="text"
                 required
                 onChange={(e) => {
-                  setRefUsername(e.target.value);
+                  setRefUsername(e.target.value.toLowerCase());
                 }}
                 value={refUsername}
               />

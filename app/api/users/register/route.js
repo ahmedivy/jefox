@@ -43,7 +43,7 @@ export async function POST(request) {
       referrerId: referrerUser.id,
       position,
       ancestorsIds: [...referrerUser.ancestorsIds, referrerUser.id],
-      username,
+      username: username.toLowerCase(),
       password: hashedPassword,
       leftReferralsIds: [],
       rightReferralsIds: [],
