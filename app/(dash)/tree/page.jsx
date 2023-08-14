@@ -11,7 +11,7 @@ const Tree = dynamic(() => import("react-d3-tree"), {
 });
 
 function Page() {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState({});
   const [translate, containerRef] = useCenteredTree();
   const { toast } = useToast();
   const { data: session } = useSession();
@@ -33,7 +33,7 @@ function Page() {
   useEffect(() => {
     fetchData(username).then((data) => setData(data));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [session]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
