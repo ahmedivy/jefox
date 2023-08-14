@@ -33,7 +33,7 @@ function Page() {
   useEffect(() => {
     fetchData(username).then((data) => setData(data));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [session]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
