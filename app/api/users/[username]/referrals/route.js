@@ -81,3 +81,5 @@ export async function GET(request, { params }) {
     rights,
   });
 }
+
+export const revalidate = 0;

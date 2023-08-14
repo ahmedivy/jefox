@@ -9,3 +9,5 @@ export async function GET(request) {
     usersCount,
   });
 }
+
+export const revalidate = 0;

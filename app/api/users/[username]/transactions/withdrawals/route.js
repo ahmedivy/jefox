@@ -69,3 +69,5 @@ export async function POST(request, { params }) {
     user: updatedUser,
   });
 }
+
+export const revalidate = 0;

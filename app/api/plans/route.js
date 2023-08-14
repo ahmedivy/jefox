@@ -9,3 +9,5 @@ export async function GET(request) {
     plans,
   });
 }
+
+export const revalidate = 0;

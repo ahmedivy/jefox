@@ -27,3 +27,5 @@ export async function GET(request, { params }) {
     exists: false,
   });
 }
+
+export const revalidate = 0;

@@ -16,3 +16,5 @@ export async function GET(request, { params }) {
 
   return NextResponse.json(user);
 }
+
+export const revalidate = 0;
