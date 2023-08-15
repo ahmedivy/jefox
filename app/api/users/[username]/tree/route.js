@@ -6,6 +6,8 @@ export async function GET(request, { params }) {
   try {
     const username = params.username;
 
+    console.log("Fetching hierarchical data for user:", username);
+
     // Fetch the user's data
     const user = await prisma.user.findUnique({
       where: {
@@ -14,6 +16,7 @@ export async function GET(request, { params }) {
       select: {
         username: true,
         image: true,
+        id: true,
         leftReferralsIds: true,
         rightReferralsIds: true,
       },
@@ -83,4 +86,5 @@ export async function GET(request, { params }) {
   }
 }
 
+export const dynamic = "force-dynamic";
 export const revalidate = 0;
