@@ -19,7 +19,7 @@ function DashHeader({ user }) {
               <FiMenu />
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="w-[220px] p-4">
+          <SheetContent side="left" className="w-[220px] p-4 bg-gradient">
             <div className="flex flex-col space-y-3">
               <DashNav />
             </div>
