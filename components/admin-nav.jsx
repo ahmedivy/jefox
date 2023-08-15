@@ -45,7 +45,9 @@ function AdminNav() {
 
   return (
     <nav>
-      <h1 className="text-2xl font-bold mb-8 px-3">Jefox</h1>
+      <Link href="/">
+        <h1 className="text-2xl font-bold mb-8 px-3">Jefox</h1>
+      </Link>
       <div className="flex flex-col space-y-2">
         {routes.map((route) => (
           <Link href={route.href} key={route.href} prefetch={false}>
