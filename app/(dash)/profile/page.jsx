@@ -1,4 +1,3 @@
-import RegisterCard from "@/components/register-card";
 import UpdateCard from "@/components/update-card";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";

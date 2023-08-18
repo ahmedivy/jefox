@@ -37,6 +37,7 @@ export async function GET(request, { params }) {
         select: {
           username: true,
           image: true,
+          position: true,
           leftReferralsIds: true,
           rightReferralsIds: true,
         },
@@ -70,6 +71,7 @@ export async function GET(request, { params }) {
 
       return {
         name: user.username,
+        position: user.position,
         image: user.image ?? `https://avatar.vercel.sh/${user.username}`,
         children: children,
       };

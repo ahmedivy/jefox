@@ -75,14 +75,18 @@ function Page() {
               width: "100%",
               height: "100%",
               display: "flex",
+              flexDirection: "column",
+              gap: 1,
               justifyContent: "center",
               alignItems: "center",
               textAlign: "center",
-              color: "black",
+              color: "white",
               fontSize: 15,
+              textShadow: "0 1px 0 rgba(0, 0, 0, 0.4)",
             }}
           >
-            {nodeDatum.name}
+            <p>{`${nodeDatum.name}`}</p>
+            <p>{`[${nodeDatum.position}]`}</p>
           </div>
         </foreignObject>
       </g>
