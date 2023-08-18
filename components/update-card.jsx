@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { ReloadIcon } from "@radix-ui/react-icons";
+import { AiFillCamera } from "react-icons/ai";
+import { useUploadThing } from "@/lib/uploadthing";
 
 import { Button } from "./ui/button";
 import { Label } from "./ui/label";
@@ -9,6 +11,7 @@ import { Input } from "./ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { useRouter } from "next/navigation";
 import { useToast } from "./ui/use-toast";
+import { Avatar, AvatarImage } from "./ui/avatar";
 
 export function UpdateCard({ user }) {
   const router = useRouter();
@@ -22,9 +25,14 @@ export function UpdateCard({ user }) {
     email: user.email,
     phone: user.phone,
   });
+  const [selectedFiles, setSelectedFiles] = useState([]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleFileChange = (event) => {
+    const files = event.target.files;
+    setSelectedFiles(Array.from(files)); // Update selectedFiles state with the selected files
+  };
+
+  const submitUpdate = async (image = null) => {
     setIsLoading(true);
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/users/${user.username}`,
@@ -37,6 +45,7 @@ export function UpdateCard({ user }) {
           firstname: f.firstname,
           lastname: f.lastname,
           country: f.country,
+          image: image,
         }),
       }
     );
@@ -52,9 +61,37 @@ export function UpdateCard({ user }) {
     }
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (selectedFiles.length > 0) {
+      setIsLoading(true);
+      startUpload(selectedFiles.slice(0, 1));
+      return;
+    }
+
+    submitUpdate();
+  };
+
   const handleChange = (e) => {
     setF((prev) => ({ ...prev, [e.target.id]: e.target.value }));
   };
+
+  const { startUpload, isUploading } = useUploadThing("imageUploader", {
+    onClientUploadComplete: async (files) => {
+      setIsLoading(true);
+      const url = files[0].url;
+      submitUpdate(url);
+    },
+    onUploadError: (error) => {
+      console.log("upload error", error);
+      toast({
+        variant: "destructive",
+        desctiption: "Something bad happened. Please try again later.",
+      });
+      setIsLoading(false);
+    },
+  });
 
   return (
     <Card className="mx-1 md:mx-0 min-w-full md:min-w-[500px]">
@@ -66,6 +103,19 @@ export function UpdateCard({ user }) {
       <CardContent>
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col gap-4">
+            <div className="w-full flex gap-3 items-center pb-4 justify-center mx-auto">
+              <Avatar className="h-32 w-32">
+                <AvatarImage
+                  src={
+                    selectedFiles.length > 0
+                      ? URL.createObjectURL(selectedFiles[0])
+                      : user.image
+                  }
+                  alt={user.username}
+                />
+              </Avatar>
+            </div>
+
             <div className="grid gap-2">
               <Label htmlFor="firstname">First Name *</Label>
               <Input
@@ -127,6 +177,15 @@ export function UpdateCard({ user }) {
                 onChange={handleChange}
                 value={f.phone}
                 disabled
+              />
+            </div>
+
+            <div className="grid gap-2">
+              <Label> Change Profile </Label>
+              <Input
+                type="file"
+                accept="image/jpeg, image/png, image/gif"
+                onChange={handleFileChange}
               />
             </div>
 

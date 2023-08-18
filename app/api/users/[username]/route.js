@@ -23,6 +23,9 @@ export async function GET(request, { params }) {
         withdrawn: user.withdrawn,
         country: user.country,
         phone: user.phone,
+        image: user.image
+          ? user.image
+          : `https://avatar.vercel.sh/${user.username}`,
       },
     });
   } else {
@@ -40,7 +43,7 @@ export async function PUT(request, { params }) {
     },
   });
   if (user) {
-    const { firstname, lastname, country } = await request.json();
+    const { firstname, lastname, country, image } = await request.json();
     await prisma.user.update({
       where: {
         username,
@@ -49,6 +52,7 @@ export async function PUT(request, { params }) {
         firstname,
         lastname,
         country,
+        image,
       },
     });
     return NextResponse.json({
