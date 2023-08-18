@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { useCenteredTree } from "@/lib/hooks/useCenteredTree";
 import { useSession } from "next-auth/react";
@@ -11,7 +11,7 @@ const Tree = dynamic(() => import("react-d3-tree"), {
 });
 
 function Page() {
-  const [data, setData] = useState({});
+  const [data, setData] = useState(null);
   const [translate, containerRef] = useCenteredTree();
   const { toast } = useToast();
   const { data: session } = useSession();
@@ -55,7 +55,7 @@ function Page() {
 
     return (
       <g onClick={toggleNode}>
-        <circle r={nodeSize / 2} fill="lightblue" />
+        <circle r={nodeSize / 2} fill="black" />
         <image
           x={-imageWidth / 2}
           y={-imageHeight / 2}
@@ -86,7 +86,7 @@ function Page() {
             }}
           >
             <p>{`${nodeDatum.name}`}</p>
-            <p>{`[${nodeDatum.position}]`}</p>
+            <p>{nodeDatum.position ? `[${nodeDatum.position}]` : ""}</p>
           </div>
         </foreignObject>
       </g>
@@ -94,22 +94,35 @@ function Page() {
   };
 
   return (
-    <div
-      className="w-screen md:w-full bg-white h-screen md:h-full"
-      ref={containerRef}
-    >
-      <Tree
-        data={data}
-        translate={translate}
-        nodeSize={{ x: 200, y: 200 }}
-        orientation="vertical"
-        pathFunc={"diagonal"}
-        nodeSvgShape={{ shape: "none" }}
-        renderCustomNodeElement={(rd3tProps) => getCustomNodeShape(rd3tProps)}
-        collapsible
-        shouldCollapseNeighborNodes
-      />
-    </div>
+    <>
+      {data ? (
+        <div
+          className="w-screen md:w-full bg-white h-screen md:h-full"
+          ref={containerRef}
+        >
+          <Tree
+            data={data}
+            translate={translate}
+            nodeSize={{ x: 200, y: 200 }}
+            orientation="vertical"
+            pathFunc={"diagonal"}
+            nodeSvgShape={{ shape: "none" }}
+            renderCustomNodeElement={(rd3tProps) =>
+              getCustomNodeShape(rd3tProps)
+            }
+            collapsible
+            shouldCollapseNeighborNodes
+          />
+        </div>
+      ) : (
+        <div className="flex flex-col items-center justify-center w-full h-full ">
+          <p className="text-2xl font-bold">
+            Loading tree...
+          </p>
+        </div>
+      )
+    }
+    </>
   );
 }
 
