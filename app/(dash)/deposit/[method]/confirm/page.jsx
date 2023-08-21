@@ -35,8 +35,8 @@ async function Page({ params }) {
       </p>
       <h1 className="text-xl font-bold pl-2">Account Details</h1>
       <div className="text-md pl-2 text-center flex flex-col gap-2 font-semibold">
-        <p>Account Name: Ahmed Abdullah</p>
-        <p>Account Number: 03179947486</p>
+        <p>Account Name: Muhammad Sarwar</p>
+        <p>Account Number: 03434604289</p>
       </div>
       <p className="text-muted-foreground text-md wrap text-center">
         After sending payment, kindly share the Transaction Screenshot below.
