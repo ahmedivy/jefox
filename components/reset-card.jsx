@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { signIn } from "next-auth/react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
+import { useToast } from "./ui/use-toast";
 import { Button } from "./ui/button";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
@@ -17,15 +17,14 @@ import {
 } from "./ui/card";
 import { ReloadIcon } from "@radix-ui/react-icons";
 
-export function LoginCard() {
-  const [username, setUsername] = useState("");
+export function ResetCard({ email, token }) {
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(null);
   const [isLoading, setLoading] = useState(false);
+  const { toast } = useToast();
 
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/dashboard";
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -33,19 +32,34 @@ export function LoginCard() {
       setLoading(true);
       setError(null);
 
-      const result = await signIn("credentials", {
-        redirect: false,
-        username,
-        password,
-        callbackUrl,
+      if (password.length < 6) {
+        setError("Password must be at least 6 characters");
+        setLoading(false);
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        setError("Passwords do not match");
+        setLoading(false);
+        return;
+      }
+
+      const res = await fetch("/api/password/change", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password, token }),
       });
 
-      setLoading(false);
+      const data = await res.json();
 
-      if (result?.error) {
-        setError("Sorry, password not correct.");
+      if (data.error) {
+        setError(data.error);
+        setLoading(false);
       } else {
-        router.push(callbackUrl);
+        toast({
+          description: "Password changed successfully, login with new one.",
+        });
+        router.push("/login");
       }
     } catch (error) {
       setLoading(false);
@@ -57,7 +71,7 @@ export function LoginCard() {
     <Card className="mx-1 md:mx-0 min-w-full md:min-w-[440px]">
       <CardHeader className="space-y-2 md:space-y-4 flex flex-col items-center">
         <CardTitle className="text-2xl test-center">
-          Login to your account
+          Create new Password
         </CardTitle>
         <CardDescription>
           Not a member yet?{" "}
@@ -70,16 +84,6 @@ export function LoginCard() {
         <form onSubmit={onSubmit}>
           <div className="grid gap-4">
             <div className="grid gap-2">
-              <Label htmlFor="username">Username</Label>
-              <Input
-                id="username"
-                type="username"
-                required
-                onChange={(e) => setUsername(e.target.value.toLowerCase())}
-                value={username}
-              />
-            </div>
-            <div className="grid gap-2">
               <Label htmlFor="password">Password</Label>
               <Input
                 id="password"
@@ -89,18 +93,24 @@ export function LoginCard() {
                 value={password}
               />
             </div>
+            <div className="grid gap-2">
+              <Label htmlFor="confirmPassword">Confirm Password</Label>
+              <Input
+                id="confirmPassword"
+                type="password"
+                required
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                value={confirmPassword}
+              />
+            </div>
             {error && (
               <p className="text-red-500 text-sm text-center">{error}</p>
             )}
-
-            <Link href="/forgot/password" className="underline text-foreground">
-              Forget Password?
-            </Link>
             <Button className="w-full" disabled={isLoading} type="submit">
               {isLoading && (
                 <ReloadIcon className="animate-spin h-4 w-4 mr-2" />
               )}
-              Login
+              Change Password
             </Button>
           </div>
         </form>
@@ -109,4 +119,4 @@ export function LoginCard() {
   );
 }
 
-export default LoginCard;
+export default ResetCard;

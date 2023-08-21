@@ -37,11 +37,6 @@ async function Page() {
       <h1 className="text-2xl font-bold pl-2">Deposit</h1>
       <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-4 w-full gap-4 pt-4">
         <BankCard
-          name="Jazz Cash"
-          image="/jazzcash.png"
-          href="/deposit/jazzcash"
-        />
-        <BankCard
           name="Easy Paisa"
           image="/easypaisa.png"
           href="/deposit/easypaisa"

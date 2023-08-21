@@ -28,33 +28,34 @@ function DepositForm({ method }) {
 
   return (
     <div className="w-full md:w-[380px]">
-        <div className="flex flex-col w-full gap-2">
-          <Label className="pl-1">Amount</Label>
-          <Input
-            type="number"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            required
-          />
-          {error ? (
-            <p className="text-sm text-red-500 pl-1">{error}</p>
-          ) : (
-            <p className="text-sm text-muted-foreground pl-1">
-              In dollars (1$ = 180 PKR)
-            </p>
-          )}
-        </div>
+      <div className="flex flex-col w-full gap-2">
+        <Label className="pl-1">Amount</Label>
+        <Input
+          type="number"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+          required
+        />
+        {error ? (
+          <p className="text-sm text-red-500 pl-1">{error}</p>
+        ) : (
+          <p className="text-sm text-muted-foreground pl-1">
+            In dollars (1$ = 180 PKR)
+          </p>
+        )}
+      </div>
 
-        <Receipt amount={amount} />
+      <Receipt amount={amount} />
 
-        <Button
-          className="w-full font-semibold my-8"
-          disabled={isDisable}
-        >
-          <Link href={`/deposit/${method}/confirm/?amount=${amount}`}>
-            Confirm Deposit
-          </Link>
-        </Button>
+      <Button
+        className="w-full font-semibold my-8"
+        disabled={isDisable}
+        asChild
+      >
+        <Link href={`/deposit/${method}/confirm/?amount=${amount}`}>
+          Confirm Deposit
+        </Link>
+      </Button>
     </div>
   );
 }
