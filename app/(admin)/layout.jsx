@@ -20,7 +20,6 @@ export const revalidate = 0;
 export const metadata = {
   title: {
     default: "Jofex",
-    template: `%s - Jofex`,
   },
   description: "A marketing website",
   themeColor: [
