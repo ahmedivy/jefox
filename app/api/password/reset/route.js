@@ -38,7 +38,7 @@ export async function POST(request) {
   const data = await resend.emails.send({
     from: "Jefox Marketing <noreply@jefox.website>",
     to: [user.email],
-    subject: "Hello world",
+    subject: "Password Reset",
     react: ResetEmail({ username: user.username, link: resetLink }),
   });
 
