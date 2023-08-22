@@ -14,11 +14,14 @@ export const metadata = {
     default: "Jofex Marketing",
   },
   description:
-    "Welcome to [Your Website Name], your authentic destination for lucrative opportunities in the world of marketing. Uncover a reliable platform where you can effortlessly earn commissions by harnessing the power of referrals. Our proven system empowers you to share exceptional products and services with others while reaping the rewards of your influence.",
+    "Authentic destination for lucrative opportunities in the world of marketing. Uncover a reliable platform where you can effortlessly earn commissions by harnessing the power of referrals. Our proven system empowers you to share exceptional products and services with others while reaping the rewards of your influence.",
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },
   ],
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export const revalidate = 0;
