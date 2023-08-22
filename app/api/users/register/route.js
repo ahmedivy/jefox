@@ -30,6 +30,12 @@ export async function POST(request) {
     });
   }
 
+  if (!referrerUser.planId) {
+    return NextResponse.json({
+      error: "Referrer has no plan subscribed",
+    });
+  }
+
   const hashedPassword = await hash(password, 10);
 
   const user = await prisma.user.create({
