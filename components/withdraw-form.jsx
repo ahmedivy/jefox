@@ -88,7 +88,7 @@ function WithdrawForm({ method, balance, username }) {
       return;
     }
 
-    if (amount > balance) {
+    if (Number(amount) + Number(amount) * 0.06 > balance) {
       setError("Amount must be less than your balance");
       setIsLoading(false);
       return;

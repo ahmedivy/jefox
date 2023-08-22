@@ -41,6 +41,11 @@ async function Page() {
           image="/easypaisa.png"
           href="/deposit/easypaisa"
         />
+        <BankCard
+          name="Jazz Cash"
+          image="/jazzcash.png"
+          href="/deposit/jazzcash"
+        />
       </div>
       <h1 className="text-2xl font-bold pl-2">History</h1>
       <Table className="w-full lg:w-1/2">
