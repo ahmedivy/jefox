@@ -29,13 +29,14 @@ async function Page({ params }) {
           ? `Send your deposit amount to our account through your EasyPaisa mobile
           account by dialing *786# or through your EasyPaisa mobile app. You can
           deposit money through any nearby EasyPaisa agent too.`
-          : `Send your deposit amount to our account through your EasyPaisa mobile
-          account by dialing *786# or through your EasyPaisa mobile app. You can
-          deposit money through any nearby EasyPaisa agent too.`}
+          : `Send your deposit amount to our account through your JazzCash mobile account by dialing *786# or through your JazzCash mobile app. You can deposit money through any nearby JazzCash agent too.`}
       </p>
       <h1 className="text-xl font-bold pl-2">Account Details</h1>
       <div className="text-md pl-2 text-center flex flex-col gap-2 font-semibold">
-        <p>Account Name: Muhammad Sarwar</p>
+        <p>
+          Account Name:{" "}
+          {method === "easypaisa" ? "Muhammad Sarwar" : "Hamza Sarwar"}
+        </p>
         <p>Account Number: 03434604289</p>
       </div>
       <p className="text-muted-foreground text-md wrap text-center">
