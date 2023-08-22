@@ -32,9 +32,9 @@ export default function RootLayout({ children }) {
           <AuthProvider>
             <Header />
             {children}
-            <Toaster />
           </AuthProvider>
         </ThemeProvider>
+        <Toaster />
       </body>
     </html>
   );
