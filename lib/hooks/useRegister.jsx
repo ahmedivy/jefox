@@ -82,7 +82,7 @@ export default function useRegister(ref, pos) {
       position,
       terms,
     };
-    
+
     const res = await fetch("/api/users/register", {
       method: "POST",
       headers: {
@@ -94,25 +94,25 @@ export default function useRegister(ref, pos) {
     console.log(res);
 
     const data = await res.json();
-    
+
     console.log(data);
-    
+
     if (data.error) {
       setError(data.error);
       setIsLoading(false);
       return;
     }
-    
+
     setIsLoading(false);
     setF(initialFields);
     setRefUsername("");
     setPosition("left");
     setValidRef(false);
     setTerms(false);
-    
+
     toast({
       description: "Account created successfully",
-    })
+    });
 
     router.push("/login");
   };
@@ -130,7 +130,7 @@ export default function useRegister(ref, pos) {
     setPosition,
     handleTerms,
     terms,
-    toast
+    toast,
   };
 }
 

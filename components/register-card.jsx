@@ -93,7 +93,7 @@ export function RegisterCard() {
               <Label htmlFor="password">Position *</Label>
               <Select
                 disabled={!validRef}
-                defaultValue="left"
+                defaultValue={position}
                 onValueChange={(p) => setPosition(p)}
               >
                 <SelectTrigger>
