@@ -25,6 +25,8 @@ async function Page() {
   const data = await res.json();
   const user = data.user;
 
+  console.log(user);
+
   return (
     <main className="p-4">
       <h1 className="text-2xl font-bold pl-2">Dashboard</h1>
@@ -32,8 +34,8 @@ async function Page() {
         <DashCard
           title="Total Balance"
           icon={<LuDollarSign />}
-          value={`$ ${Math.round(Number(user.balance), 2)}`}
-          subValue={`${Math.round(Number(user.balance) * 180, 2)} Rs`}
+          value={`$ ${user.balance.toFixed(2)}`}
+          subValue={`${(user.balance* 180).toFixed(2)} Rs`}
         />
         <DashCard
           title="Referrals"
