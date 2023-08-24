@@ -32,8 +32,8 @@ async function Page() {
         <DashCard
           title="Total Balance"
           icon={<LuDollarSign />}
-          value={`$ ${Math.round(user.balance, 2)}`}
-          subValue={`${Math.round(user.balance * 180, 2)} Rs`}
+          value={`$ ${Math.round(Number(user.balance), 2)}`}
+          subValue={`${Math.round(Number(user.balance) * 180, 2)} Rs`}
         />
         <DashCard
           title="Referrals"
