@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ReloadIcon } from "@radix-ui/react-icons";
+import { BsFillQuestionCircleFill } from "react-icons/bs";
 
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
@@ -21,6 +22,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useRegister } from "@/lib/hooks/useRegister";
 import { useSearchParams } from "next/navigation";
@@ -62,7 +68,18 @@ export function RegisterCard() {
         <form onSubmit={handleSubmit}>
           <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
             <div className="grid gap-2">
-              <Label htmlFor="referre">Referrer *</Label>
+              <div className="flex gap-2">
+                <Label htmlFor="referre">Referrer </Label>
+                <Popover>
+                  <PopoverTrigger>
+                    <BsFillQuestionCircleFill className="text-foreground" />
+                  </PopoverTrigger>
+                  <PopoverContent>
+                    If you don&apos;t have a referrer, you can add &ldquo;admin&rdquo; as your
+                    referrer.
+                  </PopoverContent>
+                </Popover>
+              </div>
               <Input
                 id="referrer"
                 type="text"
