@@ -3,10 +3,12 @@ A marketing platform where users can refer others to grow their referral tree an
 
 ## Features
 
-- User Referral System: Users can refer new members and build their referral tree.
-- Commission Earnings: Earn commissions based on the growth of your referral tree.
+- Users can refer new members and build their referral tree.
+- Earn commissions based on the growth of your referral tree.
+- Activate the plan that suites you.
+- Deposit and withdraw through local Payment Gateways (EasyPaisa and JazzCash)
 
-  ## Tech Stack
+## Tech Stack
   
 - MongoDB Atlas
 - Next.js (App Router)
