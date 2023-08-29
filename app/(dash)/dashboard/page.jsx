@@ -35,7 +35,7 @@ async function Page() {
           title="Total Balance"
           icon={<LuDollarSign />}
           value={`$ ${user.balance.toFixed(2)}`}
-          subValue={`${(user.balance* 180).toFixed(2)} Rs`}
+          subValue={`${(user.balance * 180).toFixed(2)} Rs`}
         />
         <DashCard
           title="Referrals"
